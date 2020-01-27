@@ -6,9 +6,9 @@ class SideBar extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state={
-			children: ['Game','Introduction', 'Appearance', 'Fun Facts'],
+			children: ['Introduction', 'Appearance', 'Fun Facts','Game'],
 			// current active component is activeChild
-			activeChild: 'Game',
+			activeChild: 'Introduction',
 			phoneNav: false
 		}
 

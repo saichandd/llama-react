@@ -1,14 +1,27 @@
 .game-container{
-	display: flex;
-	flex-wrap: wrap;
-	width: 480px;
-	height: 240px;
+	position: relative;
+	width: 60vw;
+	height: 30vw;
 	background-color: black;
 }
 
+.game-container > img{
+	position: absolute;
+	left: 0;
+	top:0;
+	width: 4.166%;
+}
+
+.game-container .earth{
+	display: flex;
+	flex-wrap: wrap;
+	width: 60vw;
+	height: 30vw;
+}
+
 .game-container div{
-	width: 20px;
-	height: 20px;
+	height: 8.333%;
+	width: 4.166%;
 }
 
 .game-container .water{

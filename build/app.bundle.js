@@ -8982,6 +8982,7 @@ var Game = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, props));
 
+		_this.myllama = _react2.default.createRef();
 		_this.state = {
 			earthTypes: ['water', 'land', 'grass', 'hills']
 		};
@@ -8998,9 +8999,14 @@ var Game = function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'game-container' },
-					terrain_linear.map(function (child, i) {
-						return _react2.default.createElement(Earth, { key: i, id: i, earthType: _this2.state.earthTypes[child] });
-					})
+					_react2.default.createElement('img', { iref: this.myllama, src: './src/static/img/llama.png' }),
+					_react2.default.createElement(
+						'div',
+						{ className: 'earth' },
+						terrain_linear.map(function (child, i) {
+							return _react2.default.createElement(Earth, { key: i, id: i, earthType: _this2.state.earthTypes[child] });
+						})
+					)
 				)
 				// Game component ends
 
@@ -9509,9 +9515,9 @@ var SideBar = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (SideBar.__proto__ || Object.getPrototypeOf(SideBar)).call(this, props));
 
 		_this.state = {
-			children: ['Game', 'Introduction', 'Appearance', 'Fun Facts'],
+			children: ['Introduction', 'Appearance', 'Fun Facts', 'Game'],
 			// current active component is activeChild
-			activeChild: 'Game',
+			activeChild: 'Introduction',
 			phoneNav: false
 		};
 

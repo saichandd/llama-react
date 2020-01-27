@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 class Game extends React.Component{
 	constructor(props) {
 		super(props);
+		this.myllama = React.createRef();
 		this.state = {
 			earthTypes: ['water','land', 'grass', 'hills']
 		}
@@ -13,11 +14,14 @@ class Game extends React.Component{
 		return(
 			// Game component
 			<div className="game-container">
-				{
-					terrain_linear.map((child,i) =>
-						<Earth key={i} id={i} earthType={this.state.earthTypes[child]}/>
-					)
-				}
+				<img iref={this.myllama} src='./src/static/img/llama.png'/>
+				<div className="earth">
+					{
+						terrain_linear.map((child,i) =>
+							<Earth key={i} id={i} earthType={this.state.earthTypes[child]}/>
+						)
+					}
+				</div>
 			</div>	
 			// Game component ends
 		)		
