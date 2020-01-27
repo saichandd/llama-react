@@ -1,17 +1,49 @@
+.game-container-parent > header h1{
+	margin-bottom: 40px;
+}
+
+.game-container-parent > ul li{
+	font-size: 14px;
+	color: #354052;
+	margin-bottom: 5px;
+}
+
+.game-container-parent > ul li::before{
+	content: "- ";
+}
+
 .game-container{
 	position: relative;
 	width: 60vw;
 	height: 30vw;
 	background-color: black;
+	margin-top: 30px;
 }
 
 .game-container > img{
 	position: absolute;
 	left: 0;
 	top:0;
-	width: 4.166%;
+	transform: translate(0,0);
+	width: 2%;
+	z-index: 3;
+}
+.game-container .score{
+	color:white;
+	font-size: 18px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+.game-container .energy{
+	color:white;
+	font-size: 18px;
+	position: absolute;
+	right: 20px;
+	top: 40px;
 }
 
+/*earth has all types of lands*/
 .game-container .earth{
 	display: flex;
 	flex-wrap: wrap;
@@ -19,11 +51,12 @@
 	height: 30vw;
 }
 
-.game-container div{
-	height: 8.333%;
-	width: 4.166%;
+.game-container .earth div{
+	height: 4%;
+	width: 2%;
 }
 
+/*land types*/
 .game-container .water{
 	background-color: #1a7ffe;
 }
@@ -35,4 +68,100 @@
 }
 .game-container .hills{
 	background-color: #054105;
+}
+
+
+/*direction controls*/
+.motion-controls{
+	position: absolute;
+	right : 20px;
+	bottom: 20px;
+	opacity: 0.8;
+	width: 90px;
+	height: 90px;
+	z-index: 2;
+}
+
+.motion-controls img{
+	position: absolute;
+	width: 30px;
+	height: 30px;
+}
+
+.motion-controls img:hover{
+	opacity: 0.7;
+}
+
+.motion-controls img:nth-child(1){
+	top: 0;
+	left: 30px;
+}
+
+.motion-controls img:nth-child(2){
+	top:30px;
+	left: 60px;
+}
+
+.motion-controls img:nth-child(3){
+	top: 60px;
+	left: 30px;
+}
+
+.motion-controls img:nth-child(4){
+	top: 30px;
+	left: 0px;
+}
+
+
+/*game end popup*/
+.game-end{
+	position: absolute;
+	width: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	background-color: rgba(0,0,0,0.75);
+	outline: none;
+	text-align: center;
+	padding: 40px 0;
+	color: white;
+	border-radius: 10px;
+}
+
+.game-end button{
+	color:black;
+	background-color: white;
+	width: 90px;
+	height: 30px;
+	font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align:center;
+	line-height: 100%;
+	border : none;   
+	border-radius: 5px;
+}
+
+.game-end button::-moz-focus-inner {
+  border: 0;
+}
+
+.game-end button:hover{
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+
+
+/*//bigger game on mobile*/
+@media only screen and (max-width: 768px) {
+	.game-container{
+		width: 90vw;
+		height: 45vw;
+	}
+
+	.game-container .earth{
+		width: 90vw;
+		height: 45vw;
+	}
 }

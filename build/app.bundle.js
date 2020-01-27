@@ -8982,34 +8982,289 @@ var Game = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, props));
 
-		_this.myllama = _react2.default.createRef();
 		_this.state = {
-			earthTypes: ['water', 'land', 'grass', 'hills']
+			earthTypes: ['water', 'land', 'grass', 'hills'],
+			position: [0, 9],
+			score: 0,
+			apple_position: [5, 0],
+			gameEnd: false,
+			energy: 100
 		};
+
+		_this.moveUp = _this.moveUp.bind(_this);
+		_this.moveRight = _this.moveRight.bind(_this);
+		_this.moveDown = _this.moveDown.bind(_this);
+		_this.moveLeft = _this.moveLeft.bind(_this);
+		_this.restartGame = _this.restartGame.bind(_this);
+		// this.handleKeyPress = this.handleKeyPress.bind(this, 'myllama');
 		return _this;
 	}
 
+	// handleKeyPress(refName, e) {
+
+	//    }
+
+
 	_createClass(Game, [{
-		key: 'render',
-		value: function render() {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
 			var _this2 = this;
 
+			document.addEventListener('keydown', function (event) {
+
+				if (event.keyCode === 38) {
+					console.log('up');
+					_this2.moveUp();
+				} else if (event.keyCode === 40) {
+					console.log('down');
+					_this2.moveDown();
+				} else if (event.keyCode === 39) {
+					_this2.moveRight();
+				} else if (event.keyCode === 37) {
+					_this2.moveLeft();
+				}
+			});
+
+			this.appleInterval = setInterval(function () {
+				_this2.setState({
+					apple_position: LAND_COORDINATES[Math.floor(Math.random() * LAND_COORDINATES.length)]
+				});
+			}, 7500);
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			clearInterval(this.appleInterval);
+		}
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate() {
+
+			if (this.state.position[0] === this.state.apple_position[0] && this.state.position[1] === this.state.apple_position[1]) {
+				this.setState({
+					score: this.state.score + 1,
+					energy: this.state.energy + 32,
+					apple_position: LAND_COORDINATES[Math.floor(Math.random() * LAND_COORDINATES.length)]
+				});
+			} else if (isWater(TERRAIN, this.state.position)) {
+				this.resetGame();
+			} else if (this.state.energy === -1) {
+				this.resetGame();
+			}
+		}
+	}, {
+		key: 'randomInRange',
+		value: function randomInRange(start, end) {
+			return Math.floor(Math.random() * (end - start + 1) + start);
+		}
+	}, {
+		key: 'moveUp',
+		value: function moveUp() {
+			if (this.state.position[1] !== 0) {
+				this.setState({
+					position: [this.state.position[0], this.state.position[1] - 1],
+					energy: this.state.energy - 1
+				});
+			}
+		}
+	}, {
+		key: 'moveRight',
+		value: function moveRight() {
+			if (this.state.position[0] !== 49) {
+				this.setState({
+					position: [this.state.position[0] + 1, this.state.position[1]],
+					energy: this.state.energy - 1
+				});
+			}
+		}
+	}, {
+		key: 'moveDown',
+		value: function moveDown() {
+			if (this.state.position[1] !== 24) {
+				this.setState({
+					position: [this.state.position[0], this.state.position[1] + 1],
+					energy: this.state.energy - 1
+				});
+			}
+		}
+	}, {
+		key: 'moveLeft',
+		value: function moveLeft() {
+			if (this.state.position[0] !== 0) {
+				this.setState({
+					position: [this.state.position[0] - 1, this.state.position[1]],
+					energy: this.state.energy - 1
+				});
+			}
+		}
+	}, {
+		key: 'earthWidth',
+		value: function earthWidth() {
+			console.log(window.innerWidth);
+			if (window.innerWidth < 768) {
+				return window.innerWidth * 0.9;
+			}
+			return window.innerWidth * 0.6;
+		}
+	}, {
+		key: 'earthHeight',
+		value: function earthHeight() {
+			if (window.innerWidth < 768) {
+				return window.innerWidth * 0.5 * 0.9;
+			}
+			return window.innerWidth * 0.3;
+		}
+	}, {
+		key: 'resetGame',
+		value: function resetGame() {
+			console.log('drowned');
+			this.setState({
+				position: [0, 9],
+				energy: 0,
+				gameEnd: true
+			});
+		}
+	}, {
+		key: 'restartGame',
+		value: function restartGame() {
+			console.log('game starts');
+			this.setState({
+				score: 0,
+				energy: 40,
+				gameEnd: false
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this3 = this;
+
+			// console.log('re rendering', this.state.position,this.earthWidth(), this.earthHeight());
+			var drowned = 'Looks like you took a nose dive!';
+			var energy = 'Easy there, slow down!';
 			return (
 				// Game component
 				_react2.default.createElement(
 					'div',
-					{ className: 'game-container' },
-					_react2.default.createElement('img', { iref: this.myllama, src: './src/static/img/llama.png' }),
+					{ className: 'game-container-parent' },
+					_react2.default.createElement(
+						'header',
+						null,
+						_react2.default.createElement(
+							'h1',
+							{ className: 'child-h1' },
+							'Eat the apples!'
+						)
+					),
+					_react2.default.createElement(
+						'h2',
+						{ className: 'medium-head' },
+						'Rules of the game'
+					),
+					_react2.default.createElement(
+						'ul',
+						null,
+						_react2.default.createElement(
+							'li',
+							null,
+							'Each apple gets you an.. apple, duh. And increases your score.'
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'The apple disspears in some time if you dont eat it quick enough'
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'Every step you take, consumes energy! Step wisely!'
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'Every apple gets you an energy of 32.'
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'And, don\'t drown in the water!'
+						)
+					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'earth' },
-						terrain_linear.map(function (child, i) {
-							return _react2.default.createElement(Earth, { key: i, id: i, earthType: _this2.state.earthTypes[child] });
-						})
+						{ className: 'game-container' },
+						this.state.gameEnd && _react2.default.createElement(
+							'div',
+							{ className: 'game-end' },
+							'Oops!',
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'b',
+								null,
+								'YOUR SCORE:'
+							),
+							' ',
+							this.state.score,
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'b',
+								null,
+								'ENERGY REMAINING:'
+							),
+							' ',
+							this.state.energy,
+							_react2.default.createElement('br', null),
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(
+								'button',
+								{ onClick: this.restartGame },
+								'Restart'
+							)
+						),
+						!this.state.gameEnd && _react2.default.createElement('img', {
+							// onKeyPress={this.handleKeyPress} 
+							// ref='myllama'
+							src: './src/static/img/llama.png',
+							style: {
+								transform: 'translate(' + this.state.position[0] * this.earthWidth() / 50 + 'px,' + this.state.position[1] * this.earthHeight() / 25 + 'px)',
+								transition: 'transform ease-out 0.2s' }
+						}),
+						_react2.default.createElement('img', {
+							src: './src/static/icons/apple.svg',
+							style: {
+								transform: 'translate(' + this.state.apple_position[0] * this.earthWidth() / 50 + 'px,' + this.state.apple_position[1] * this.earthHeight() / 25 + 'px)'
+							}
+						}),
+						_react2.default.createElement(
+							'p',
+							{ className: 'score' },
+							'score: ',
+							this.state.score
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'energy' },
+							'energy: ',
+							this.state.energy
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'motion-controls' },
+							_react2.default.createElement('img', { onClick: this.moveUp, src: './src/static/icons/up-button.svg' }),
+							_react2.default.createElement('img', { onClick: this.moveRight, src: './src/static/icons/right-button.svg' }),
+							_react2.default.createElement('img', { onClick: this.moveDown, src: './src/static/icons/down-button.svg' }),
+							_react2.default.createElement('img', { onClick: this.moveLeft, src: './src/static/icons/left-button.svg' })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'earth' },
+							TERRAIN_LINEAR.map(function (child, i) {
+								return _react2.default.createElement(Earth, { key: i, id: i, earthType: _this3.state.earthTypes[child] });
+							})
+						)
 					)
 				)
-				// Game component ends
-
 			);
 		}
 	}]);
@@ -9021,9 +9276,31 @@ var Earth = function Earth(props) {
 	return _react2.default.createElement('div', { className: props.earthType });
 };
 
-var TERRAIN = [[0, 0, 0, 0, 1, 1, 1, 1, 2, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2], [0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2], [0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1], [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 3, 2, 2, 1], [1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2, 1], [1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 2]];
+var TERRAIN = [[0, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1], [0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1], [0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2], [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2], [1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2], [1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1], [2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1], [2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1], [2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1], [2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1], [2, 2, 2, 2, 2, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1], [2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
 
-var terrain_linear = (_ref = []).concat.apply(_ref, TERRAIN);
+var TERRAIN_LINEAR = (_ref = []).concat.apply(_ref, TERRAIN);
+
+var land_coordinates = function land_coordinates(TERRAIN, earth) {
+	var arr = [];
+	for (var i = 0; i < TERRAIN.length; i++) {
+		for (var j = 0; j < TERRAIN[0].length; j++) {
+			if (TERRAIN[i][j] === earth) {
+				arr.push([j, i]);
+			}
+		}
+	}
+	// console.log('2', arr)
+	return arr;
+};
+
+var isWater = function isWater(TERRAIN, pos) {
+	if (TERRAIN[pos[1]][pos[0]] === 0) {
+		return true;
+	}
+	return false;
+};
+
+var LAND_COORDINATES = land_coordinates(TERRAIN, 1);
 
 exports.default = Game;
 
@@ -9283,7 +9560,6 @@ var Slideshow = function (_React$Component) {
 		value: function goToPrevSlide() {
 			var _this2 = this;
 
-			console.log('called prevslide');
 			if (this.state.currentIndex === 0) return;
 
 			this.setState(function (prevState) {

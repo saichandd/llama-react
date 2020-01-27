@@ -25,7 +25,6 @@ class Slideshow extends React.Component{
 	}
 
 	goToPrevSlide(){
-		console.log('called prevslide')
 		if(this.state.currentIndex === 0)
 			return;
 

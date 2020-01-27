@@ -5,7 +5,7 @@
 	width: 280px;
 	padding: 50px 50px 40px 50px;
 	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.15);
-	z-index: 2;
+	z-index: 5;
 	overflow-x: hidden;
 	transition: 0.4s;
 	background-color: white;
@@ -114,6 +114,7 @@ h5, h4{
 		position: absolute;
 		left: 15px;
 		top: 15px;
+		z-index: 10;
 	}
 
 	.nav-bar > header > h4{
