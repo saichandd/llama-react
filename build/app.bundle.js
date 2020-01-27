@@ -8954,6 +8954,8 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _ref;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -8978,15 +8980,28 @@ var Game = function (_React$Component) {
 	function Game(props) {
 		_classCallCheck(this, Game);
 
-		return _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, props));
+
+		_this.state = {
+			earthTypes: ['water', 'land', 'grass', 'hills']
+		};
+		return _this;
 	}
 
 	_createClass(Game, [{
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			return (
 				// Game component
-				_react2.default.createElement('div', { className: 'game-container' })
+				_react2.default.createElement(
+					'div',
+					{ className: 'game-container' },
+					terrain_linear.map(function (child, i) {
+						return _react2.default.createElement(Earth, { key: i, id: i, earthType: _this2.state.earthTypes[child] });
+					})
+				)
 				// Game component ends
 
 			);
@@ -8995,6 +9010,14 @@ var Game = function (_React$Component) {
 
 	return Game;
 }(_react2.default.Component);
+
+var Earth = function Earth(props) {
+	return _react2.default.createElement('div', { className: props.earthType });
+};
+
+var TERRAIN = [[0, 0, 0, 0, 1, 1, 1, 1, 2, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2], [0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2], [0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2], [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1], [1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 3, 2, 2, 1], [1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2, 1], [1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 2]];
+
+var terrain_linear = (_ref = []).concat.apply(_ref, TERRAIN);
 
 exports.default = Game;
 
