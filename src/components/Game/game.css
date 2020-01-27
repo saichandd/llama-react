@@ -22,6 +22,7 @@
 	height: 30vw;
 	background-color: black;
 	margin-top: 30px;
+	touch-action: manipulation;
 }
 
 .game-container > img{

@@ -9013,12 +9013,16 @@ var Game = function (_React$Component) {
 			document.addEventListener('keydown', function (event) {
 
 				if (event.keyCode === 38) {
+					event.preventDefault();
 					_this2.moveUp();
 				} else if (event.keyCode === 40) {
+					event.preventDefault();
 					_this2.moveDown();
 				} else if (event.keyCode === 39) {
+					event.preventDefault();
 					_this2.moveRight();
 				} else if (event.keyCode === 37) {
+					event.preventDefault();
 					_this2.moveLeft();
 				}
 			});

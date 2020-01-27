@@ -26,17 +26,21 @@ class Game extends React.Component{
  //    }
 	componentDidMount() {
 		document.addEventListener('keydown', event => {
-
+			
 			if (event.keyCode === 38){
+				event.preventDefault();
 				this.moveUp();
 			}
 			else if(event.keyCode === 40){
+				event.preventDefault();
 				this.moveDown();
 			}
 			else if(event.keyCode === 39){
+				event.preventDefault();
 				this.moveRight();	
 			}
 			else if(event.keyCode === 37){
+				event.preventDefault();
 				this.moveLeft();	
 			}
 		})
@@ -49,7 +53,7 @@ class Game extends React.Component{
 	}
 
 	componentWillUnmount() {
-	  clearInterval(this.appleInterval);
+	 	clearInterval(this.appleInterval);
 	}
 
 	componentDidUpdate(){
