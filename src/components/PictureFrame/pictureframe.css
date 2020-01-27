@@ -1,0 +1,26 @@
+.picture-frame-container{
+	display: block;
+	width: 20%;
+	margin: 0px 20px 20px 0px;
+}
+
+.picture-frame-container > div{
+	width: 100%;
+	padding-top: 75%;
+	background-position: 50% 50%;
+    background-position: center center;
+    /*background-attachment: fixed;*/
+    background-size: cover;
+}
+.picture-frame-container > p{
+	margin: 5px 5px 0px 0px;
+	opacity: 0.9;
+}
+
+
+@media only screen and (max-width: 768px) {
+	.picture-frame-container{
+		width: 100%;
+		margin: 0px 10px 10px 0px;
+	}
+}

@@ -1,0 +1,12 @@
+@import url('./app.css');
+
+@import url('../containers/Main/main.css');
+@import url('../containers/SideBar/sidebar.css');
+
+@import url('../components/FunFacts/funfacts.css');
+@import url('../components/Appearance/appearance.css');
+@import url('../components/Introduction/introduction.css');
+@import url('../components/Game/game.css');
+
+@import url('../components/PictureFrame/pictureframe.css');
+@import url('../components/Slideshow/slideshow.css');

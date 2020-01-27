@@ -1,0 +1,29 @@
+*{
+  /*border: 1px solid red;*/
+}
+
+body {
+    font-family: 'Roboto', 'Sans Serif';
+}
+
+/*common styles for all elements present*/
+body, div, header, h1, h2, h3, h4, h5, h6, p, ul, li, span, nav{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul{
+	list-style-type: none;
+}
+
+#id{
+	width: 100%;
+}
+
+.home-container{
+	width: 100%;
+	display: flex;
+	overflow: scroll;
+	min-height: 100vh;
+}

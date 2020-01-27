@@ -1,0 +1,19 @@
+
+.funfacts-container ul{
+	margin-top: 10px
+	list-style:none;
+	list-style-type: revert;
+}
+
+.funfacts-container ul li{
+	margin: 20px 0;
+}
+
+.funfacts-container ul li::before{
+	content: "-";
+	color: "#354052";
+}
+
+/*.funfacts-container ul li p{
+	margin: 2px 0;
+}*/

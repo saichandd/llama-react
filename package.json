@@ -1,0 +1,26 @@
+{
+  "name": "llama",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "homepage":"https://saichandd.github.io/llama-react",
+  "scripts": {
+    "webpack": "webpack",
+    "predeploy":"webpack",
+    "deploy":"gh-pages -d build"
+  },
+  "author": "saichand",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "gh-pages": "^2.2.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}

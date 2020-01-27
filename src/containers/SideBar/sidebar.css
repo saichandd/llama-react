@@ -1,0 +1,141 @@
+/*left nav-bar*/
+.nav-bar{
+	position: relative;
+	height: 100%;
+	width: 280px;
+	padding: 50px 50px 40px 50px;
+	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.15);
+	z-index: 2;
+	overflow-x: hidden;
+	transition: 0.4s;
+	background-color: white;
+}
+
+.nav-bar > header > h4{
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+/*.nav-bar.game{
+
+}*/
+
+h5, h4{
+	text-transform: uppercase;
+}
+
+/*header*/
+.medium-head{
+	margin-bottom: 11px;
+	color: #354052;
+	font-family: Roboto;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 17px;
+}
+
+/*sidebar items*/
+.children-list{
+	list-style-type: none;
+}
+
+.children-list li{
+	color: #354052;
+	font-size: 14px;
+	line-height: 40px;
+	cursor: pointer;
+	text-align: center;
+}
+.children-list li:hover{
+	transition: 0.25s;
+	color: #00a8ff;
+}
+/*active item*/
+.children-list li.active{
+	font-weight: 700;
+}
+.children-list li.active:hover{
+	color: #354052;
+}
+/*logo at bottom*/
+.nav-bar .llama-img{
+	position: absolute;
+	width: 150px;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+
+/*responsive queries*/
+@media only screen and (max-width: 1024px) {
+	.nav-bar{
+		width: 210px;
+	}
+}
+
+/*decrease sidebar width*/
+@media only screen and (min-width: 768px) {
+	.hamburger{
+		display: none;
+	}
+
+	.close-hamburger{
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.hamburger{
+		display: flex;
+		position: absolute;
+		align-items: center;
+		width: 100%;
+		padding: 12px;
+		box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+		background-color: white;
+	}
+
+	.hamburger img{
+		/*display: inline-block;*/
+		width: 25px;
+	}
+
+	.hamburger h4{
+		width: calc(100% - 60px);
+		margin-bottom: 0;
+		text-align: center;
+	}
+
+
+	/*close button*/
+	.close-hamburger{
+		width: 20px;
+		position: absolute;
+		left: 15px;
+		top: 15px;
+	}
+
+	.nav-bar > header > h4{
+		margin-bottom: 20px;
+	}
+
+	.nav-bar .llama-img{
+		bottom: 20px;
+	}
+
+	.nav-bar{
+		position: fixed;
+		left: -200px;
+		width: 200px;
+		padding: 70px 20px 20px 20px;
+	}
+
+	.nav-not-active{
+		left: -200px;
+	}
+
+	.nav-active{
+		left: 0px;
+	}
+}

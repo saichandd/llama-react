@@ -1,0 +1,73 @@
+.slideshow {
+	position: relative;
+	width: 60vw;
+	margin: 50px auto 0 auto;
+	height: 320px;
+	overflow: hidden;
+	white-space: nowrap;
+	background-color: black;
+}
+
+.slideshow-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.slide-text-box{
+	vertical-align: top;
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+}
+
+.slide-text-box p{
+	position: relative;
+	display: block;
+	top: 50%;
+	width: 100%;
+	transform: translateY(-50%);
+	text-align: center;
+	color: white;
+	white-space: normal;
+	font-size: 20px;
+	font-weight: 500;	
+	padding: 0 60px;
+}
+
+.slide-text-box i{
+	/*position: relative;
+	top: 50%;
+	margin: 0 auto;*/
+	background-image: url('./src/static/icons/twitter.svg');
+}
+
+.slideshow img{
+	position: absolute;
+	width: 30px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+}
+.slideshow .forward-arrow {
+	right: 15px;
+	
+}
+.slideshow .back-arrow{
+	left: 15px;
+}
+.slideshow a{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 25px;
+	bottom: 50px;
+	z-index: 2;
+}
+
+@media only screen and (max-width: 768px) {
+	.slideshow {
+		width: 80vw;
+		margin: 20px auto 0 auto;
+	}
+}
