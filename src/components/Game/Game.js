@@ -28,11 +28,9 @@ class Game extends React.Component{
 		document.addEventListener('keydown', event => {
 
 			if (event.keyCode === 38){
-				console.log('up')
 				this.moveUp();
 			}
 			else if(event.keyCode === 40){
-				console.log('down')
 				this.moveDown();
 			}
 			else if(event.keyCode === 39){
@@ -109,7 +107,6 @@ class Game extends React.Component{
  	}
 
     earthWidth(){
-    	console.log(window.innerWidth);
     	if(window.innerWidth < 768){
     		return window.innerWidth*0.9
     	}
@@ -125,7 +122,6 @@ class Game extends React.Component{
 
 
     resetGame(){
-    	console.log('drowned');
     	this.setState({
     		position: [0,9],
     		energy: 0,
@@ -134,7 +130,6 @@ class Game extends React.Component{
     }
 
     restartGame(){
-    	console.log('game starts');
     	this.setState({
     		score: 0,
     		energy: 40,
@@ -144,7 +139,6 @@ class Game extends React.Component{
 
 	render(){
 
-		// console.log('re rendering', this.state.position,this.earthWidth(), this.earthHeight());
 		let drowned = 'Looks like you took a nose dive!';
 		let energy = 'Easy there, slow down!';
 		return(
@@ -169,6 +163,15 @@ class Game extends React.Component{
 					</li>
 					<li>
 						And, don't drown in the water!
+					</li>
+				</ul>
+				<h2 className="medium-head">Controls</h2>
+				<ul>
+					<li>
+						You can use your keyboard arrows or the buttons given.
+					</li>
+					<li>
+						Play the game in landscape on mobile for better control.
 					</li>
 				</ul>
 				<div className="game-container">
@@ -269,7 +272,6 @@ var land_coordinates = (TERRAIN, earth) => {
 			}
 		}
 	}
-	// console.log('2', arr)
 	return arr;
 }
 

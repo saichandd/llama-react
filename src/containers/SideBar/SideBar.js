@@ -17,7 +17,6 @@ class SideBar extends React.Component{
 
 	// on child click
 	toggleMenu(){
-		console.log('toggled');
 		this.setState({phoneNav: !this.state.phoneNav});
 	}
 

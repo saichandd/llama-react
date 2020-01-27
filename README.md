@@ -1,20 +1,20 @@
-# Its a react app about Llamas
+# Its a react app about Llamas, also has a game!
 
 [live on github](https://saichandd.github.io/llama-react/)
 
-## SETUP
+## Setup
 - To run: You can directly open index.html in root folder(because code was built before)
 - For development
 - Run these commands 
 	1. npm install
 	2. webpack --watch
 
-## DEPENDENCIES
+## Dependencies
 - node
 - webpack
 - babel
 
-## NOTES
+## Notes
 * app.js is root javascript file
 * styles.css is root css
 

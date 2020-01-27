@@ -9013,10 +9013,8 @@ var Game = function (_React$Component) {
 			document.addEventListener('keydown', function (event) {
 
 				if (event.keyCode === 38) {
-					console.log('up');
 					_this2.moveUp();
 				} else if (event.keyCode === 40) {
-					console.log('down');
 					_this2.moveDown();
 				} else if (event.keyCode === 39) {
 					_this2.moveRight();
@@ -9100,7 +9098,6 @@ var Game = function (_React$Component) {
 	}, {
 		key: 'earthWidth',
 		value: function earthWidth() {
-			console.log(window.innerWidth);
 			if (window.innerWidth < 768) {
 				return window.innerWidth * 0.9;
 			}
@@ -9117,7 +9114,6 @@ var Game = function (_React$Component) {
 	}, {
 		key: 'resetGame',
 		value: function resetGame() {
-			console.log('drowned');
 			this.setState({
 				position: [0, 9],
 				energy: 0,
@@ -9127,7 +9123,6 @@ var Game = function (_React$Component) {
 	}, {
 		key: 'restartGame',
 		value: function restartGame() {
-			console.log('game starts');
 			this.setState({
 				score: 0,
 				energy: 40,
@@ -9139,7 +9134,6 @@ var Game = function (_React$Component) {
 		value: function render() {
 			var _this3 = this;
 
-			// console.log('re rendering', this.state.position,this.earthWidth(), this.earthHeight());
 			var drowned = 'Looks like you took a nose dive!';
 			var energy = 'Easy there, slow down!';
 			return (
@@ -9188,6 +9182,25 @@ var Game = function (_React$Component) {
 							'li',
 							null,
 							'And, don\'t drown in the water!'
+						)
+					),
+					_react2.default.createElement(
+						'h2',
+						{ className: 'medium-head' },
+						'Controls'
+					),
+					_react2.default.createElement(
+						'ul',
+						null,
+						_react2.default.createElement(
+							'li',
+							null,
+							'You can use your keyboard arrows or the buttons given.'
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							'Play the game in landscape on mobile for better control.'
 						)
 					),
 					_react2.default.createElement(
@@ -9289,7 +9302,6 @@ var land_coordinates = function land_coordinates(TERRAIN, earth) {
 			}
 		}
 	}
-	// console.log('2', arr)
 	return arr;
 };
 
@@ -9807,7 +9819,6 @@ var SideBar = function (_React$Component) {
 	_createClass(SideBar, [{
 		key: 'toggleMenu',
 		value: function toggleMenu() {
-			console.log('toggled');
 			this.setState({ phoneNav: !this.state.phoneNav });
 		}
 
