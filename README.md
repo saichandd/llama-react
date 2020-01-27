@@ -4,7 +4,7 @@
 
 ## Whats the project about?
 
-- Its a fun website about llamas, made with react.
+Its a fun website about llamas, made with react.
 
 ## Setup
 - To run: You can directly open index.html in root folder(because code was built before)
