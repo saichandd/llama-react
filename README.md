@@ -1,5 +1,7 @@
 # Its a react app about Llamas
 
+[live on github](https://saichandd.github.io/llama-react/)
+
 ## SETUP
 - To run: You can directly open index.html in root folder(because code was built before)
 - For development
